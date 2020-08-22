@@ -4,7 +4,7 @@ HTML, CSS, JS
 
 User has the ability to add a new expense and to delete an expense if desired. The inputs are desc, location, amount, and date.
 
-<small>Live Link: {}</small>
+<small>Live Link: {https://thevanillaexpensetrackerapp.netlify.app/}</small>
 
 <img src="images/img1.png" width="450" height="550">
 
