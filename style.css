@@ -1,0 +1,59 @@
+body {
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.container {
+    background-color: beige;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.container-title {
+    font-size: 2rem;
+}
+
+.input-group {
+    padding: 0.5rem;
+    margin: 0.1rem;
+}
+
+#submit-button {
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 1rem;
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+}
+
+.submit:hover {
+    background-color: coral;
+    border: none;
+}
+
+.expense-output {
+    background-color: burlywood;
+    padding: 4rem;
+}
+
+.expense-output-item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    background-color: dodgerblue;
+    color: white;
+    border: 1px solid white
+}
+
+.delete-button {
+    margin-top: 0.4rem;
+}
+
+.delete-btn {
+    background-color: red;
+    padding: 1rem;
+    border: none;
+}
