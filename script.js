@@ -1,97 +1,84 @@
 class Expense {
-    constructor(key, description, location, amount, date) {
-        this.key = key;
-        this.description = description;
-        this.location = location;
-        this.amount = amount;
-        this.date = date;
-    }
+  constructor(key, description, location, amount, date) {
+    this.key = key;
+    this.description = description;
+    this.location = location;
+    this.amount = amount;
+    this.date = date;
+  }
 }
-
-const randomID = () => {
-    return Math.floor(Math.random() * 1000000);
-};
 
 class CreateExpenseItem {
-    static createButton(buttonName, desc) {
-        const btn = document.createElement("button");
-        btn.id = buttonName;
-        btn.classList.add(buttonName);
-        btn.textContent = desc;
-        return btn;
-    }
+  static createButton(buttonName, desc) {
+    const btn = document.createElement("button");
+    btn.id = buttonName;
+    btn.classList.add(buttonName);
+    btn.textContent = desc;
+    return btn;
+  }
 
-    static createExpense(expense) {
-        const newDiv = document.createElement("div");
-        const btnDiv = document.createElement("div");
+  static createExpense(expense) {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("expense-output-item");
 
-        newDiv.classList.add('expense-output-item');
-        btnDiv.classList.add("delete-button");
+    const btnDiv = document.createElement("div");
+    btnDiv.classList.add("delete-button");
 
-        const expenseDescription = document.createElement("h3");
-        expenseDescription.textContent = expense.description;
+    const expenses = Object.values(expense);
+    newDiv.innerHTML = expenses
+      .map((expense) => `<h3>${expense}</h3>`)
+      .join("");
 
-        const expenseLocation = document.createElement("h3");
-        expenseLocation.textContent = expense.location;
+    const deleteBtn = CreateExpenseItem.createButton("delete-btn", "Del");
 
-        const expenseAmount = document.createElement("h3");
-        expenseAmount.textContent = expense.amount;
+    deleteBtn.addEventListener("click", (e) =>
+      CreateExpenseItem.deleteExpense(e.target)
+    );
 
-        const expenseDate = document.createElement("h3");
-        expenseDate.textContent = expense.date;
+    btnDiv.appendChild(deleteBtn);
 
-        const deleteBtn = CreateExpenseItem.createButton("delete-btn", "Del");
+    newDiv.appendChild(btnDiv);
+    return newDiv;
+  }
 
-        deleteBtn.addEventListener("click", (e) =>
-            CreateExpenseItem.deleteExpense(e.target)
-        );
+  static addExpense(expense) {
+    const newExpense = document.querySelector(".expense-output");
+    const newDiv = CreateExpenseItem.createExpense(expense);
 
-        btnDiv.appendChild(deleteBtn);
-        newDiv.appendChild(expenseDescription);
-        newDiv.appendChild(expenseLocation);
-        newDiv.appendChild(expenseAmount);
-        newDiv.appendChild(expenseDate);
-        newDiv.appendChild(btnDiv);
-        return newDiv;
-    }
+    newExpense.appendChild(newDiv);
+  }
 
-    static addExpense(expense) {
-        const newExpense = document.querySelector(".expense-output");
-        const newDiv = CreateExpenseItem.createExpense(expense);
-
-        newExpense.appendChild(newDiv);
-    }
-
-    static deleteExpense(element) {
-        element.parentElement.parentElement.remove();
-    }
-
-    static clearFields() {
-        document.querySelector("#description").value = "";
-        document.querySelector("#location").value = "";
-        document.querySelector("#amount").value = "";
-        document.querySelector("#date").value = "";
-    }
+  static deleteExpense(element) {
+    element.parentElement.parentElement.remove();
+  }
 }
 
-document.querySelector("#submit-button").addEventListener("click", () => {
-    const key = randomID();
-    const description = document.querySelector("#description").value;
-    const location = document.querySelector("#location").value;
-    const amount = document.querySelector("#amount").value;
-    const date = document.querySelector("#date").value;
+document.querySelector("#submit-button").addEventListener("click", (e) => {
+  e.preventDefault();
 
-    if (description === "" && location === "" && amount === "" && date === "") {
-        alert("add");
-    } else {
-        const newExpenseItem = new Expense(
-            key,
-            description,
-            location,
-            amount,
-            date
-        );
-        CreateExpenseItem.addExpense(newExpenseItem);
-        CreateExpenseItem.clearFields();
-    }
+  const key = Math.floor(Math.random() * 1000000);
+  const description = document.querySelector("#description").value;
+  const location = document.querySelector("#location").value;
+
+  let amount = document.querySelector("#amount").value;
+  amount = parseFloat(amount).toFixed(2);
+
+  let date = document.querySelector("#date").value;
+  date = Intl.DateTimeFormat("en-US").format(new Date());
+
+  if (description === "" || location === "" || amount === "" || date === "") {
+    alert("Fields cannot be empty");
+  } else {
+    const newExpenseItem = new Expense(
+      key,
+      description,
+      location,
+      amount,
+      date
+    );
+    CreateExpenseItem.addExpense(newExpenseItem);
+
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => (input.value = ""));
+  }
 });

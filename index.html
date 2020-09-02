@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="container-title">
-            <h2>This is theExpenseTracker</h2>
-        </div>
-        <div class="expense-input">
-            <div class="form">
-                <div class="form-group">
-                    <input class="input-group" id="description" type="text" placeholder="Enter Description" />
-                    <input class="input-group" id="location" type="text" placeholder="Enter Location" />
-                    <input class="input-group" id="amount" type="number" placeholder="Enter Amount" />
-                    <input class="input-group" id="date" type="text" placeholder="MM/DD/YYYY" />
-                </div>
-                <button class="form-group" id="submit-button">Submit</button>
-            </div>
-        </div>
-        <div class="expense-output"></div>
-        <div class="footnote"></div>
-    </div>
-    <!-- If I change the div.form to form.form then the app will spit out the 
-        content and then it dissapears. If I don't the app works, 
-        Why and how to fix that?-->
-    <script type="text/javascript" src='script.js'></script>
-</body>
+      <div class="container-title">
+        <h2>This is theExpenseTracker</h2>
+      </div>
+      <div class="expense-input">
+        <form class="form form-group">
+          <input id="description" type="text" placeholder="Enter Description" />
+          <input id="location" type="text" placeholder="Enter Location" />
+          <input id="amount" type="number" placeholder="Enter Amount" />
+          <input id="date" type="date" />
 
+          <button class="form-group" id="submit-button">Submit</button>
+        </form>
+      </div>
+      <div class="expense-output"></div>
+      <div class="footnote"></div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
 </html>
